@@ -1,0 +1,2 @@
+var AnimationFilter = function() {
+};
