@@ -12,6 +12,9 @@ PIXI.loader.once('complete', function() {
   var frameData = PIXI.loader.resources["TreetopCity_Zone1_Run1_0_frames"].data.frames;
 
   var sprite = new PIXI.Sprite(PIXI.loader.resources.TreetopCity_Zone1_Run1_0.texture);
+
+  sprite.filters = [new AnimationFilter()];
+
   stage.addChild(sprite);
 
   render();
