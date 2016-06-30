@@ -26,4 +26,4 @@ setInterval(function() {
   }
 
   frameRateContainer.innerHTML = (1000 / lastFrameDuration).toFixed(1);
-}, 1000);
+}, 500);
