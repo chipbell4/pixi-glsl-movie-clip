@@ -33,6 +33,10 @@ PIXI.loader.once('complete', function() {
 
   sprite.filters = [filter];
 
+  var aspectRatio = 159 / 210;
+  sprite.width = 400;
+  sprite.height = sprite.width * aspectRatio;
+
   stage.addChild(sprite);
 
   render();
