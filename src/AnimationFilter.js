@@ -42,6 +42,16 @@ var AnimationFilter = function(options) {
     'uniform vec2 spriteDimensions;',
     'uniform vec2 viewportDimensions;',
 
+    // converts a coordinate to local texture coordinates
+    'vec2 toLocalCoordinates(vec2 uv) {',
+    '  return uv * viewportDimensions / spriteDimensions;',
+    '}',
+
+    'vec2 toGlobalCoordinates(vec2 uv) {',
+    '  return uv * spriteDimensions / viewportDimensions;',
+    '}',
+
+
     // Gets the current frame index, based off the current time
     'int getCurrentFrame(void) {',
     '  float animationDurationInMillis = float(TOTAL_FRAMES) / float(framerate) * 1000.0;',
@@ -65,8 +75,10 @@ var AnimationFilter = function(options) {
     'void main(void){',
     '  int frameIndex = getCurrentFrame();',
     '  vec4 frame = selectFrame(frameIndex);',
-    '  vec2 frameUV = frame.xy + frame.zw * vTextureCoord;',
-    '  gl_FragColor = texture2D(uSampler, frameUV) * vColor;',
+    '  vec2 localCoordinates = toLocalCoordinates(vTextureCoord);',
+    '  vec2 frameUV = frame.xy + frame.zw * localCoordinates;',
+    '  vec2 globalCoordinates = toGlobalCoordinates(frameUV);',
+    '  gl_FragColor = texture2D(uSampler, globalCoordinates) * vColor;',
     '}'
   ].join('\n');
 
