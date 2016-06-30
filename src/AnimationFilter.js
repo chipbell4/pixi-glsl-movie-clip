@@ -23,8 +23,7 @@ var AnimationFilter = function() {
 
     'void main(void){',
     '  int currentFrame = getCurrentFrame();',
-    '  vec4 color = 1.0 * vec4(1.0, 1.0, 1.0, 0.0); + vec4(0.0, 0.0, 0.0, 1.0);',
-    '  gl_FragColor = texture2D(uSampler, vTextureCoord) * color ;',
+    '  gl_FragColor = texture2D(uSampler, vTextureCoord) * vColor;',
     '}'
   ].join('\n');
 
