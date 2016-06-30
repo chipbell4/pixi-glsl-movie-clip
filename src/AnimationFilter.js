@@ -28,11 +28,11 @@ var AnimationFilter = function(options) {
     'uniform int currentTime;',
 
     // The frame associated with the animation
-    'uniform int frameRate;',
+    'uniform int framerate;',
 
     // Gets the current frame index, based off the current time
     'int getCurrentFrame(void) {',
-    '  float animationDurationInMillis = float(TOTAL_FRAMES) / float(frameRate) * 1000.0;',
+    '  float animationDurationInMillis = float(TOTAL_FRAMES) / float(framerate) * 1000.0;',
     '  float elapsedMillis = float(currentTime - animationStart);',
     '  float percentageComplete = mod(elapsedMillis, animationDurationInMillis) / animationDurationInMillis;',
     '  return int(percentageComplete * float(TOTAL_FRAMES));',
@@ -63,7 +63,7 @@ var AnimationFilter = function(options) {
       type: 'v4v',
       value: options.frames
     },
-    frameRate: {
+    framerate: {
       type: 'i',
       value: options.framerate
     },
