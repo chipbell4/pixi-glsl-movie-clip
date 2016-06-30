@@ -1,6 +1,8 @@
 PIXI.loader.add('TreetopCity_Zone1_Run1_0', 'TreetopCity_Zone1_Run1_0.png')
 PIXI.loader.add('TreetopCity_Zone1_Run1_0_frames', 'TreetopCity_Zone1_Run1_0.json');
 
+var filter = new AnimationFilter();
+
 PIXI.loader.once('complete', function() {
   console.log('Loaded');
 
@@ -13,7 +15,7 @@ PIXI.loader.once('complete', function() {
 
   var sprite = new PIXI.Sprite(PIXI.loader.resources.TreetopCity_Zone1_Run1_0.texture);
 
-  sprite.filters = [new AnimationFilter()];
+  sprite.filters = [filter];
 
   stage.addChild(sprite);
 
