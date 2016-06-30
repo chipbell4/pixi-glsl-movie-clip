@@ -20,6 +20,12 @@ PIXI.loader.once('complete', function() {
   stage.addChild(sprite);
 
   render();
+
+  var tick = function() {
+    filter.tick();
+    requestAnimationFrame(tick);
+  };
+  tick();
 });
 
 PIXI.loader.load();
