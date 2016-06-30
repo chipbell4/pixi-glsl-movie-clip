@@ -29,7 +29,9 @@ PIXI.loader.once('complete', function() {
   
   var filter = new AnimationFilter({
     frames: animationFilterFrames,
-    framerate: 2
+    framerate: 2,
+    spriteDimensions: { x: sprite.width, y: sprite.height },
+    viewportDimensions: { x: renderer.width, y: renderer.height },
   });
 
   sprite.filters = [filter];

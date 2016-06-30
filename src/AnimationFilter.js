@@ -5,6 +5,14 @@ var AnimationFilter = function(options) {
     throw new Error('options.frames must be an array');
   }
 
+  if(options.viewportDimensions === undefined) {
+    throw new Error('Need viewportDimensions. renderer.width and renderer.height should suffice');
+  }
+
+  if(options.spriteDimensions === undefined) {
+    throw new Error('Need spriteDimensions. sprite.width and sprite.height should suffice');
+  }
+
   options.framerate = options.framerate || 30;
 
   var fragmentShader = [
@@ -29,6 +37,10 @@ var AnimationFilter = function(options) {
 
     // The frame associated with the animation
     'uniform int framerate;',
+
+    // The viewport and sprite sizes, so we can do UV math properly
+    'uniform vec2 spriteDimensions;',
+    'uniform vec2 viewportDimensions;',
 
     // Gets the current frame index, based off the current time
     'int getCurrentFrame(void) {',
@@ -74,6 +86,14 @@ var AnimationFilter = function(options) {
     currentTime: {
       type: 'i',
       value: Date.now()
+    },
+    spriteDimensions: {
+      type: 'v2',
+      value: options.spriteDimensions
+    },
+    viewportDimensions: {
+      type: 'v2',
+      value: options.viewportDimensions
     }
   };
 
