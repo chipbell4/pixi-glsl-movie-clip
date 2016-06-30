@@ -1,21 +1,38 @@
-var AnimationFilter = function() {
-  var TOTAL_FRAMES = 4; // TODO: passed via constructor
+var AnimationFilter = function(frames, frameRate) {
+  frames = frames || [
+    { x: 0, y: 0, z: 0.5, w: 0.5},
+    { x: 0, y: 0.5, z: 0.5, w: 0.5},
+    { x: 0.5, y: 0, z: 0.5, w: 0.5}
+  ];
+
+  frameRate = frameRate || 30;
+
+  var TOTAL_FRAMES = frames.length;
 
   var fragmentShader = [
     'precision lowp float;',
 
+    // The normal PIXI uniforms: The UV of the texture, and the tint value
     'varying vec2 vTextureCoord;',
     'varying vec4 vColor;',
 
     'uniform sampler2D uSampler;',
     
-    // animation things
+    // The total number of frames in the animation, plus the actual frames of the animation, defined as vec4, where
+    // x = left, y = top, z = width, and w = height
     'const int TOTAL_FRAMES =' + TOTAL_FRAMES + ';',
     'uniform vec4 frames[' + TOTAL_FRAMES + '];',
+
+    // The timestamp of when the animation was started
     'uniform int animationStart;',
+    
+    // The current timestamp, updated by the tick method below
     'uniform int currentTime;',
+
+    // The frame associated with the animation
     'uniform int frameRate;',
 
+    // Gets the current frame index, based off the current time
     'int getCurrentFrame(void) {',
     '  float animationDurationInMillis = float(TOTAL_FRAMES) / float(frameRate) * 1000.0;',
     '  float elapsedMillis = float(currentTime - animationStart);',
@@ -23,6 +40,7 @@ var AnimationFilter = function() {
     '  return int(percentageComplete * float(TOTAL_FRAMES));',
     '}',
 
+    // Gets the vec4 representing the current frame bounds
     'vec4 selectFrame(const int frameIndex) {',
     '  vec4 frame = frames[0];',
     '  for(int i = 0; i < TOTAL_FRAMES; i++) {',
@@ -33,6 +51,7 @@ var AnimationFilter = function() {
     '  return frame;',
     '}',
 
+    // Main entry point, gets the current frame and then scopes the current UV coordinate to that frame
     'void main(void){',
     '  int frameIndex = getCurrentFrame();',
     '  vec4 frame = selectFrame(frameIndex);',
@@ -44,15 +63,11 @@ var AnimationFilter = function() {
   var uniforms = {
     frames: {
       type: 'v4v',
-      value: [
-        { x: 0, y: 0, z: 0.5, w: 0.5},
-        { x: 0, y: 0.5, z: 0.5, w: 0.5},
-        { x: 0.5, y: 0, z: 0.5, w: 0.5}
-      ]
+      value: frames
     },
     frameRate: {
       type: 'i',
-      value: 3
+      value: frameRate
     },
     animationStart: {
       type: 'i',
