@@ -1,7 +1,6 @@
 PIXI.loader.add('TreetopCity_Zone1_Run1_0', 'TreetopCity_Zone1_Run1_0.png')
 PIXI.loader.add('TreetopCity_Zone1_Run1_0_frames', 'TreetopCity_Zone1_Run1_0.json');
 
-
 PIXI.loader.once('complete', function() {
   var width = PIXI.loader.resources["TreetopCity_Zone1_Run1_0"].texture.width;
   var height = PIXI.loader.resources["TreetopCity_Zone1_Run1_0"].texture.height;
