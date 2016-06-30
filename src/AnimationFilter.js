@@ -14,9 +14,17 @@ var AnimationFilter = function() {
     'uniform int totalFrames;',
     'uniform vec4 frames[256];',
 
+    'int getCurrentFrame(void) {',
+    '  float animationDurationInMillis = float(totalFrames) / float(frameRate) * 1000.0;',
+    '  float elapsedMillis = float(currentTime - animationStart);',
+    '  float percentageComplete = mod(elapsedMillis, animationDurationInMillis) / animationDurationInMillis;',
+    '  return int(percentageComplete * float(totalFrames));',
+    '}',
+
     'void main(void){',
-    //'   gl_FragColor = texture2D(uSampler, vTextureCoord) * vColor ;',
-    '   gl_FragColor = texture2D(uSampler, vTextureCoord) * vColor ;',
+    '  int currentFrame = getCurrentFrame();',
+    '  vec4 color = 1.0 * vec4(1.0, 1.0, 1.0, 0.0); + vec4(0.0, 0.0, 0.0, 1.0);',
+    '  gl_FragColor = texture2D(uSampler, vTextureCoord) * color ;',
     '}'
   ].join('\n');
 
@@ -35,7 +43,7 @@ var AnimationFilter = function() {
     },
     frameRate: {
       type: 'i',
-      value: 30
+      value: 3
     },
     animationStart: {
       type: 'i',
