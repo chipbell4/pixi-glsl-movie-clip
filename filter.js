@@ -3,8 +3,6 @@ PIXI.loader.add('TreetopCity_Zone1_Run1_0_frames', 'TreetopCity_Zone1_Run1_0.jso
 
 
 PIXI.loader.once('complete', function() {
-  console.log('Loaded');
-
   var width = PIXI.loader.resources["TreetopCity_Zone1_Run1_0"].texture.width;
   var height = PIXI.loader.resources["TreetopCity_Zone1_Run1_0"].texture.height;
 
@@ -17,7 +15,6 @@ PIXI.loader.once('complete', function() {
 
   var animationFilterFrames = frames.map(function(frame) {
     var description = frameData[frame].frame;
-    console.log(description);
     return {
       x: description.x / width,
       y: description.y / height,
@@ -25,8 +22,6 @@ PIXI.loader.once('complete', function() {
       w: description.h / height
     };
   });
-
-  console.log(animationFilterFrames);
 
   var filter = new AnimationFilter({
     frames: animationFilterFrames,

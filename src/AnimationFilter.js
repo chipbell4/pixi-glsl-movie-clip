@@ -58,8 +58,6 @@ var AnimationFilter = function(options) {
     '}'
   ].join('\n');
 
-  console.log(fragmentShader);
-
   var uniforms = {
     frames: {
       type: 'v4v',
