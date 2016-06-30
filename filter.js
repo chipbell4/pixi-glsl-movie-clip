@@ -1,10 +1,12 @@
 PIXI.loader.add('TreetopCity_Zone1_Run1_0', 'TreetopCity_Zone1_Run1_0.png')
 PIXI.loader.add('TreetopCity_Zone1_Run1_0_frames', 'TreetopCity_Zone1_Run1_0.json');
 
-var filter = new AnimationFilter();
 
 PIXI.loader.once('complete', function() {
   console.log('Loaded');
+
+  var width = PIXI.loader.resources["TreetopCity_Zone1_Run1_0"].texture.width;
+  var height = PIXI.loader.resources["TreetopCity_Zone1_Run1_0"].texture.height;
 
   var frames = [];
   for(var i = 222; i <= 228; i++) {
@@ -13,6 +15,20 @@ PIXI.loader.once('complete', function() {
 
   var frameData = PIXI.loader.resources["TreetopCity_Zone1_Run1_0_frames"].data.frames;
 
+  var animationFilterFrames = frames.map(function(frame) {
+    var description = frameData[frame].frame;
+    console.log(description);
+    return {
+      x: description.x / width,
+      y: description.y / height,
+      z: description.w / width,
+      w: description.h / height
+    };
+  });
+
+  console.log(animationFilterFrames);
+
+  var filter = new AnimationFilter(animationFilterFrames, 2);
   var sprite = new PIXI.Sprite(PIXI.loader.resources.TreetopCity_Zone1_Run1_0.texture);
 
   sprite.filters = [filter];
