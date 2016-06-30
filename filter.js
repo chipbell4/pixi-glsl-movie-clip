@@ -24,7 +24,7 @@ PIXI.loader.once('complete', function() {
 
   var sprite = new PIXI.Sprite(PIXI.loader.resources.TreetopCity_Zone1_Run1_0.texture);
   var aspectRatio = 159 / 210;
-  sprite.width = 400;
+  sprite.width = 100;
   sprite.height = sprite.width * aspectRatio;
   
   var filter = new AnimationFilter({
