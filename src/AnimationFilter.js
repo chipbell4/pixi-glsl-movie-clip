@@ -1,13 +1,11 @@
-var AnimationFilter = function(frames, frameRate) {
-  frames = frames || [
-    { x: 0, y: 0, z: 0.5, w: 0.5},
-    { x: 0, y: 0.5, z: 0.5, w: 0.5},
-    { x: 0.5, y: 0, z: 0.5, w: 0.5}
-  ];
+var AnimationFilter = function(options) {
+  options = options || {};
 
-  frameRate = frameRate || 30;
+  if(options.frames === undefined || options.frames.length === 0) {
+    throw new Error('options.frames must be an array');
+  }
 
-  var TOTAL_FRAMES = frames.length;
+  options.framerate = options.framerate || 30;
 
   var fragmentShader = [
     'precision lowp float;',
@@ -20,8 +18,8 @@ var AnimationFilter = function(frames, frameRate) {
     
     // The total number of frames in the animation, plus the actual frames of the animation, defined as vec4, where
     // x = left, y = top, z = width, and w = height
-    'const int TOTAL_FRAMES =' + TOTAL_FRAMES + ';',
-    'uniform vec4 frames[' + TOTAL_FRAMES + '];',
+    'const int TOTAL_FRAMES =' + options.frames.length + ';',
+    'uniform vec4 frames[' + options.frames.length + '];',
 
     // The timestamp of when the animation was started
     'uniform int animationStart;',
@@ -60,14 +58,16 @@ var AnimationFilter = function(frames, frameRate) {
     '}'
   ].join('\n');
 
+  console.log(fragmentShader);
+
   var uniforms = {
     frames: {
       type: 'v4v',
-      value: frames
+      value: options.frames
     },
     frameRate: {
       type: 'i',
-      value: frameRate
+      value: options.framerate
     },
     animationStart: {
       type: 'i',

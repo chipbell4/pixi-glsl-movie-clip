@@ -28,7 +28,10 @@ PIXI.loader.once('complete', function() {
 
   console.log(animationFilterFrames);
 
-  var filter = new AnimationFilter(animationFilterFrames, 2);
+  var filter = new AnimationFilter({
+    frames: animationFilterFrames,
+    framerate: 2
+  });
   var sprite = new PIXI.Sprite(PIXI.loader.resources.TreetopCity_Zone1_Run1_0.texture);
 
   sprite.filters = [filter];
