@@ -1,3 +1,12 @@
+/**
+ * The MovieClipFilter class. Applies a filter to a large texture to loop over subrectangles of the texture to make it
+ * animated
+ *
+ * @param {options.frames} Array An array of vec4's describing the frames of the animation: { x: left, y: top, z: width, w: height }
+ * @param {options.viewportDimensions} Object A vec2 describing the height and width of the viewport { x: width, y: height }
+ * @param {options.spriteDimensions} Object A vec2 describing the height and width of the sprite { x: width, y: height }
+ * @param {options.framerate} Number The number of frames per second to run the animation at
+ */
 var MovieClipFilter = function(options) {
   options = options || {};
 
@@ -115,10 +124,19 @@ var MovieClipFilter = function(options) {
 MovieClipFilter.prototype = Object.create(PIXI.AbstractFilter.prototype);
 MovieClipFilter.prototype.constructor = MovieClipFilter;
 
+/**
+ * Ticks the animation to the current time. Needs to run every frame
+ */
 MovieClipFilter.prototype.tick = function() {
   this.uniforms.currentTime.value = Date.now();
 };
 
+/**
+ * Helper method to extract frame information to be passed as filter options
+ * @param {Object} textureMap A key -> PIXI.Texture from the PIXI loader for a spritesheet
+ * @param {Array[String]} frameNames The names of the frames to use in the animation from the texture map
+ * @param {PIXI.Texture} parentTexture The containing texture for all of the images
+ */
 MovieClipFilter.extractFrameDescriptions = function(textureMap, frameNames, parentTexture) {
   var width = parentTexture.width;
   var height = parentTexture.height;
