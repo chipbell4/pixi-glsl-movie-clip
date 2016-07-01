@@ -132,7 +132,8 @@ MovieClipFilter.prototype.tick = function() {
 };
 
 /**
- * Helper method to extract frame information to be passed as filter options
+ * Helper method to extract frame information to be passed as filter options.
+ * @see filter.js
  * @param {Object} textureMap A key -> PIXI.Texture from the PIXI loader for a spritesheet
  * @param {Array[String]} frameNames The names of the frames to use in the animation from the texture map
  * @param {PIXI.Texture} parentTexture The containing texture for all of the images
