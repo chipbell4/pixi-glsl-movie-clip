@@ -8,6 +8,9 @@ var makeSprite = function(animationFilterFrames) {
   sprite.width = 100;
   sprite.height = sprite.width * aspectRatio;
   
+  sprite.position.x = Math.random() * 800;
+  sprite.position.y = Math.random() * 600;
+  
   var filter = new AnimationFilter({
     frames: animationFilterFrames,
     framerate: 15,
@@ -42,7 +45,9 @@ PIXI.loader.once('complete', function() {
   var textureMap = PIXI.loader.resources["TreetopCity_Zone1_Run1_0_frames"].data.frames;
   var animationFilterFrames = AnimationFilter.extractFrameDescriptions(textureMap, frames, parentTexture);
 
-  makeSprite(animationFilterFrames);
+  for(var i = 0; i < 1000; i++) {
+    makeSprite(animationFilterFrames);
+  }
 
   render();
   tick();
