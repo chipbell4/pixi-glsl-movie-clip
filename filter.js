@@ -11,7 +11,7 @@ var makeSprite = function(animationFilterFrames) {
   sprite.position.x = Math.random() * 800;
   sprite.position.y = Math.random() * 600;
   
-  var filter = new AnimationFilter({
+  var filter = new MovieClipFilter({
     frames: animationFilterFrames,
     framerate: 15,
     spriteDimensions: { x: sprite.width, y: sprite.height },
@@ -43,7 +43,7 @@ PIXI.loader.once('complete', function() {
 
   var parentTexture = PIXI.loader.resources["TreetopCity_Zone1_Run1_0"].texture;
   var textureMap = PIXI.loader.resources["TreetopCity_Zone1_Run1_0_frames"].data.frames;
-  var animationFilterFrames = AnimationFilter.extractFrameDescriptions(textureMap, frames, parentTexture);
+  var animationFilterFrames = MovieClipFilter.extractFrameDescriptions(textureMap, frames, parentTexture);
 
   for(var i = 0; i < 1000; i++) {
     makeSprite(animationFilterFrames);

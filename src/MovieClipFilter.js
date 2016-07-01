@@ -1,4 +1,4 @@
-var AnimationFilter = function(options) {
+var MovieClipFilter = function(options) {
   options = options || {};
 
   if(options.frames === undefined || options.frames.length === 0) {
@@ -112,14 +112,14 @@ var AnimationFilter = function(options) {
   PIXI.AbstractFilter.call(this, null, fragmentShader, uniforms);
 };
 
-AnimationFilter.prototype = Object.create(PIXI.AbstractFilter.prototype);
-AnimationFilter.prototype.constructor = AnimationFilter;
+MovieClipFilter.prototype = Object.create(PIXI.AbstractFilter.prototype);
+MovieClipFilter.prototype.constructor = MovieClipFilter;
 
-AnimationFilter.prototype.tick = function() {
+MovieClipFilter.prototype.tick = function() {
   this.uniforms.currentTime.value = Date.now();
 };
 
-AnimationFilter.extractFrameDescriptions = function(textureMap, frameNames, parentTexture) {
+MovieClipFilter.extractFrameDescriptions = function(textureMap, frameNames, parentTexture) {
   var width = parentTexture.width;
   var height = parentTexture.height;
 
