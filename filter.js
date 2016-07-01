@@ -45,7 +45,7 @@ PIXI.loader.once('complete', function() {
   var textureMap = PIXI.loader.resources["TreetopCity_Zone1_Run1_0_frames"].data.frames;
   var animationFilterFrames = MovieClipFilter.extractFrameDescriptions(textureMap, frames, parentTexture);
 
-  for(var i = 0; i < 1000; i++) {
+  for(var i = 0; i < 500; i++) {
     makeSprite(animationFilterFrames);
   }
 
