@@ -118,3 +118,18 @@ AnimationFilter.prototype.constructor = AnimationFilter;
 AnimationFilter.prototype.tick = function() {
   this.uniforms.currentTime.value = Date.now();
 };
+
+AnimationFilter.extractFrameDescriptions = function(textureMap, frameNames, parentTexture) {
+  var width = parentTexture.width;
+  var height = parentTexture.height;
+
+  return frameNames.map(function(frameName) {
+    var frameDescription = textureMap[frameName].frame;
+    return {
+      x: frameDescription.x / width,
+      y: frameDescription.y / height,
+      z: frameDescription.w / width,
+      w: frameDescription.h / height
+    };
+  });
+};
