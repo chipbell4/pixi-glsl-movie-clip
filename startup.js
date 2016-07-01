@@ -1,3 +1,5 @@
+var TOTAL_ANIMATORS = 20000;
+
 // create an new instance of a pixi stage
 var stage = new PIXI.Stage(0xFFFFFF);;
 

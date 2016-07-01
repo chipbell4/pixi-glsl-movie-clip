@@ -23,11 +23,10 @@ var createClip = function() {
   clip.gotoAndPlay(Math.floor(Math.random() * textures.length));
 
   stage.addChild(clip);
-
 };
 
 PIXI.loader.once('complete', function() {
-  for(var i = 0; i < 20000; i++) {
+  for(var i = 0; i < TOTAL_ANIMATORS; i++) {
     createClip();
   }
 
