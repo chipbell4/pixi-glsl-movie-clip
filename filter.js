@@ -24,6 +24,14 @@ var makeSprite = function(animationFilterFrames) {
   return sprite;
 };
 
+var tick = function() {
+  animators.forEach(function(animator) {
+    animator.tick();
+  });
+
+  requestAnimationFrame(tick);
+}
+
 PIXI.loader.once('complete', function() {
   var frames = [];
   for(var i = 222; i <= 228; i++) {
@@ -37,15 +45,6 @@ PIXI.loader.once('complete', function() {
   makeSprite(animationFilterFrames);
 
   render();
-
-  var tick = function() {
-    animators.forEach(function(animator) {
-      animator.tick();
-    });
-
-    requestAnimationFrame(tick);
-  };
-
   tick();
 });
 
